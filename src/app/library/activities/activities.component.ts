@@ -10,7 +10,9 @@ import {ActivatedRoute} from '@angular/router';
           <p>mode is {{display}}</p>
 
           <a [routerLink]="['/library/activities',1]"
-             [queryParams]="{display: display}">activity details</a>
+             [queryParams]="{display: display}">activity details 1</a>
+          <a [routerLink]="['/library/activities',2]"
+             [queryParams]="{display: display}">activity details 2</a>
 
       </div>
   `,
