@@ -1,12 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {ActivityData} from './library/activity-data';
-import {HttpClientModule} from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
+import {SharedModule} from './shared/shared.module';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +14,10 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    CoreModule,
     InMemoryWebApiModule.forRoot(ActivityData, {delay: 1000}),
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
