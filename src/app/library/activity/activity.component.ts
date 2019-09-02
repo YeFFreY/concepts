@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ActivityService} from './activity.service';
-import {Activity} from '../../shared/interfaces';
+import {Activity, ActivityResolved} from '../../shared/interfaces';
 
 @Component({
   template: `
       <div>
+          <p>error ? {{errorMessage}}</p>
           <h1>
               {{ activity?.id}} - {{ activity?.title}}
           </h1>
@@ -18,22 +18,20 @@ export class ActivityComponent implements OnInit {
   activity: Activity;
   errorMessage: string;
 
-  constructor(private route: ActivatedRoute, private activityService: ActivityService) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     // stream of activity id to use when component would be reused through navigation
-    this.route.paramMap.subscribe(params => this.getActivity(+params.get('id')));
+    //   this.route.paramMap.subscribe(params => this.getActivity(+params.get('id')));
     // snapshot when we are sure that component might not be reused between two navigate
-    console.log('Got activity Id from snapshot: ', this.route.snapshot.paramMap.get('id'));
+    //   console.log('Got activity Id from snapshot: ', this.route.snapshot.paramMap.get('id'));
+
+    const resolvedData: ActivityResolved = this.route.snapshot.data.resolvedData;
+    this.errorMessage = resolvedData.error;
+    this.onActivityRetrieved(resolvedData.activity);
   }
 
-  getActivity(id: number) {
-    this.activityService.getActivity(id).subscribe({
-      next: activity => {
-        this.activity = activity;
-      },
-      error: err => this.errorMessage = err
-    });
+  private onActivityRetrieved(activity: Activity) {
+    this.activity = activity;
   }
-
 }

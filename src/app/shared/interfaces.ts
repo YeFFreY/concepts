@@ -3,3 +3,8 @@ export interface Activity {
   title: string;
   overview: string;
 }
+
+export interface ActivityResolved {
+  activity: Activity;
+  error?: any;
+}

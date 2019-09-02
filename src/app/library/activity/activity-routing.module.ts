@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ActivityComponent} from './activity.component';
+import {ActivityResolverService} from './activity-resolver.service';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ActivityComponent
+    component: ActivityComponent, resolve: {resolvedData: ActivityResolverService}
   }
 ];
 
