@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Activity, ActivityResolved} from '../../../shared/interfaces';
 
@@ -9,7 +9,6 @@ import {Activity, ActivityResolved} from '../../../shared/interfaces';
           <h1>
               {{ activity?.id}} - {{ activity?.title}}
           </h1>
-          <router-outlet></router-outlet>
           <a [routerLink]="['/library/activities']" queryParamsHandling="preserve">Back</a>
       </div>
   `,
@@ -31,6 +30,7 @@ export class ActivityDetailsComponent implements OnInit {
     this.route.parent.data.subscribe(data => {
       const resolvedData: ActivityResolved = data.resolvedData;
       this.errorMessage = resolvedData.error;
+      // potential form should be resetted
       this.onActivityRetrieved(resolvedData.activity);
     });
   }

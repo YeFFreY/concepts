@@ -4,6 +4,12 @@ export interface Activity {
   overview: string;
 }
 
+export interface Skill {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export interface ActivityResolved {
   activity: Activity;
   error?: any;

@@ -1,5 +1,5 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Activity} from '../shared/interfaces';
+import {Activity, Skill} from '../shared/interfaces';
 
 export class ActivityData implements InMemoryDbService {
   createDb() {
@@ -20,8 +20,20 @@ export class ActivityData implements InMemoryDbService {
         overview: 'The overview of the activity'
       }
     ];
+    const skills: Skill[] = [
+      {
+        id: 1,
+        name: 'Skill 1',
+        description: 'The skill 1 is the first skill'
+      },
+      {
+        id: 2,
+        name: 'Skill 2',
+        description: 'The skill about another thing'
+      },
+    ];
 
-    return {activities};
+    return {activities, skills};
   }
 
 }

@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Activity} from '../../shared/interfaces';
+import {handleError} from '../../../lib/services.utils';
 
 @Injectable()
 export class ActivityService {
@@ -13,13 +14,9 @@ export class ActivityService {
   getActivity(id: number): Observable<Activity> {
     return this.http.get<Activity>( `api/activities/${id}`)
       .pipe(
-        tap(data => console.log(JSON.stringify(data))),
-        catchError(this.handleError)
+        tap(data => console.log('Got activity', JSON.stringify(data))),
+        catchError(handleError)
       );
   }
 
-  private handleError(err) {
-    console.error(err);
-    return throwError('An error occurred');
-  }
 }
