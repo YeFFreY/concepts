@@ -10,8 +10,8 @@ export class ActivityService {
   constructor(private http: HttpClient) {
   }
 
-  getActivities(): Observable<Activity[]> {
-    return this.http.get<Activity[]>('api/activities')
+  getActivity(id: number): Observable<Activity> {
+    return this.http.get<Activity>( `api/activities/${id}`)
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)

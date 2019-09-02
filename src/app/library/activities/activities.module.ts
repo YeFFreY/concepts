@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {ActivitiesRoutingModule} from './activities-routing.module';
 import {SharedModule} from '../../shared/shared.module';
+import {ActivityService} from './activity.service';
 
 
 @NgModule({
@@ -11,6 +12,9 @@ import {SharedModule} from '../../shared/shared.module';
     CommonModule,
     ActivitiesRoutingModule,
     SharedModule
+  ],
+  providers: [
+    ActivityService
   ]
 })
 export class ActivitiesModule {
