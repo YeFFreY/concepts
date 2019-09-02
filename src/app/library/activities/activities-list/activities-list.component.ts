@@ -11,6 +11,7 @@ import {Activity} from '../../../shared/interfaces';
                   <th>ID</th>
                   <th>Title</th>
                   <th>Overview</th>
+                  <th>&nbsp;</th>
               </tr>
               </thead>
               <tbody>
@@ -18,6 +19,7 @@ import {Activity} from '../../../shared/interfaces';
                   <td>{{activity.id}}</td>
                   <td>{{activity.title}}</td>
                   <td>{{activity.overview}}</td>
+                  <td><a [routerLink]="['/library/activities',activity.id]" [queryParams]="{display: 'list'}">Details</a></td>
               </tr>
               <tr *ngIf="!activities.length"><td colspan="3">No Records found.</td></tr>
               </tbody>

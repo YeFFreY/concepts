@@ -7,30 +7,31 @@ import {Activity} from '../../shared/interfaces';
   template: `
       <div>
           <h1>Activities</h1>
-          <button (click)="setDisplay('grid')">Grid</button>
-          <button (click)="setDisplay('list')">List</button>
-          <p>mode is {{display}}</p>
 
-          <a [routerLink]="['/library/activities',1]"
-             [queryParams]="{display: display}">activity details 1</a>
-          <a [routerLink]="['/library/activities',2]"
-             [queryParams]="{display: display}">activity details 2</a>
+          <button (click)="setDisplayMode(displayModeEnum.Grid)">Grid</button>
+          <button (click)="setDisplayMode(displayModeEnum.List)">List</button>
 
-          {{activities.length}}
-          <app-activities-list [activities]="activities"></app-activities-list>
+          <p>mode is {{displayMode}}</p>
+
+          <app-activities-list
+                  [activities]="activities"
+                  [hidden]="displayMode !== displayModeEnum.List"></app-activities-list>
+
+          <p [hidden]="displayMode !== displayModeEnum.Grid">No grid visualization done yet</p>
       </div>
   `,
   styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
-  display = 'list';
+  displayMode: DisplayModeEnum;
+  displayModeEnum = DisplayModeEnum;
   errorMessage: string;
   activities: Activity[] = [];
 
   constructor(private route: ActivatedRoute, private activityService: ActivityService) {}
 
   ngOnInit() {
-    this.setDisplay(this.route.snapshot.queryParamMap.get('display') || 'list');
+    this.setDisplayMode(DisplayModeEnum[this.route.snapshot.queryParamMap.get('display')]);
 
     this.activityService.getActivities().subscribe({
       next: activities => {
@@ -40,7 +41,12 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  setDisplay(mode: string) {
-    this.display = mode;
+  setDisplayMode(mode: DisplayModeEnum) {
+    this.displayMode = mode || DisplayModeEnum.List;
   }
+}
+
+enum DisplayModeEnum {
+  Grid = 'grid',
+  List = 'list'
 }
