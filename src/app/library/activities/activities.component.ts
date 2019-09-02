@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ActivityService} from './activity.service';
+import {Activity} from '../../shared/interfaces';
 
 @Component({
   template: `
@@ -16,6 +17,7 @@ import {ActivityService} from './activity.service';
              [queryParams]="{display: display}">activity details 2</a>
 
           {{activities.length}}
+          <app-activities-list [activities]="activities"></app-activities-list>
       </div>
   `,
   styleUrls: ['./activities.component.scss']
@@ -23,11 +25,9 @@ import {ActivityService} from './activity.service';
 export class ActivitiesComponent implements OnInit {
   display = 'list';
   errorMessage: string;
-  activities: any[] = [];
+  activities: Activity[] = [];
 
-  constructor(private route: ActivatedRoute, private activityService: ActivityService) {
-    console.log(this.activityService);
-  }
+  constructor(private route: ActivatedRoute, private activityService: ActivityService) {}
 
   ngOnInit() {
     this.setDisplay(this.route.snapshot.queryParamMap.get('display') || 'list');

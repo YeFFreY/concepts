@@ -1,8 +1,9 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
+import {Activity} from '../shared/interfaces';
 
 export class ActivityData implements InMemoryDbService {
   createDb() {
-    const activities: any[] = [
+    const activities: Activity[] = [
       {
         id: 1,
         title: 'Activity 1',

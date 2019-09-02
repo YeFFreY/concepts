@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {ActivityData} from './library/activity-data';
 import {HttpClientModule} from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ActivityData, {delay: 1000}),
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
