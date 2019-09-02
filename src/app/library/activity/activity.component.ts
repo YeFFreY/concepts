@@ -26,9 +26,11 @@ export class ActivityComponent implements OnInit {
     // snapshot when we are sure that component might not be reused between two navigate
     //   console.log('Got activity Id from snapshot: ', this.route.snapshot.paramMap.get('id'));
 
-    const resolvedData: ActivityResolved = this.route.snapshot.data.resolvedData;
-    this.errorMessage = resolvedData.error;
-    this.onActivityRetrieved(resolvedData.activity);
+    this.route.data.subscribe(data => {
+      const resolvedData: ActivityResolved = data.resolvedData;
+      this.errorMessage = resolvedData.error;
+      this.onActivityRetrieved(resolvedData.activity);
+    });
   }
 
   private onActivityRetrieved(activity: Activity) {
