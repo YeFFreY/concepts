@@ -2,12 +2,19 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ActivityComponent} from './activity.component';
 import {ActivityResolverService} from './activity-resolver.service';
+import {ActivityDetailsComponent} from './activity-details/activity-details.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ActivityComponent, resolve: {resolvedData: ActivityResolverService}
+    component: ActivityComponent,
+    resolve: {resolvedData: ActivityResolverService},
+    children: [
+      { path: '', redirectTo: 'details', pathMatch: 'full'},
+      { path: 'details', component: ActivityDetailsComponent },
+      { path: 'edit', component: ActivityDetailsComponent },
+    ]
   }
 ];
 
@@ -16,5 +23,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ActivityRoutingModule {
-  static components = [ActivityComponent];
+  static components = [ActivityComponent, ActivityDetailsComponent ];
 }
