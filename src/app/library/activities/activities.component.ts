@@ -2,14 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ActivityService} from './activity.service';
 import {Activity} from '../../shared/interfaces';
+import {DisplayModeEnum} from './DisplayModeEnum';
 
 @Component({
   template: `
       <div>
           <h1>Activities</h1>
 
-          <button (click)="setDisplayMode(displayModeEnum.Grid)">Grid</button>
-          <button (click)="setDisplayMode(displayModeEnum.List)">List</button>
+          <button (click)="changeDisplayMode(displayModeEnum.Grid)">Grid</button>
+          <button (click)="changeDisplayMode(displayModeEnum.List)">List</button>
 
           <p>mode is {{displayMode}}</p>
 
@@ -31,7 +32,8 @@ export class ActivitiesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private activityService: ActivityService) {}
 
   ngOnInit() {
-    this.setDisplayMode(DisplayModeEnum[this.route.snapshot.queryParamMap.get('display')]);
+    const display: string = this.route.snapshot.queryParamMap.get('display');
+    this.changeDisplayMode(DisplayModeEnum[display]);
 
     this.activityService.getActivities().subscribe({
       next: activities => {
@@ -41,12 +43,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  setDisplayMode(mode: DisplayModeEnum) {
+  changeDisplayMode(mode: DisplayModeEnum) {
     this.displayMode = mode || DisplayModeEnum.List;
   }
-}
-
-enum DisplayModeEnum {
-  Grid = 'grid',
-  List = 'list'
 }
