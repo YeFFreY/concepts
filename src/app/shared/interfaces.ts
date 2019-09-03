@@ -1,3 +1,5 @@
+import {DataServiceError} from '../../lib/services.utils';
+
 export interface Activity {
   id: number;
   title: string;
@@ -19,5 +21,5 @@ export interface Skill {
 
 export interface ActivityResolved {
   activity: Activity;
-  error?: any;
+  error?: DataServiceError;
 }

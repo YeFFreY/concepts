@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {ActivityResolved} from '../../shared/interfaces';
+import {Activity, ActivityResolved} from '../../shared/interfaces';
 import {Observable, of} from 'rxjs';
 import {ActivityService} from './activity.service';
 import {catchError, map} from 'rxjs/operators';
+import {DataServiceError} from '../../../lib/services.utils';
 
 @Injectable()
 export class ActivityResolverService implements Resolve<ActivityResolved> {
@@ -13,21 +14,19 @@ export class ActivityResolverService implements Resolve<ActivityResolved> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ActivityResolved> {
-    console.log('resolving !');
     const id = route.paramMap.get('id');
     if (isNaN(+id)) {
-      const message = `Activity id was not a number: ${id}`;
-      console.error(message);
-      return of({activity: null, error: message});
+      const error = new DataServiceError();
+      error.errorType = 'Unexpected';
+      error.friendlyMessage = `Activity id was not a number: ${id}`;
+      return of({activity: null, error});
 
     }
     return this.activityService.getActivity(+id)
       .pipe(
-        map(activity => ({activity})),
-        catchError(error => {
-          const message = `Retrieval error: ${error}`;
-          console.error(message);
-          return of({activity: null, error: message});
+        map((activity: Activity) => ({activity})),
+        catchError((error: DataServiceError) => {
+          return of({activity: null, error});
         })
       );
   }

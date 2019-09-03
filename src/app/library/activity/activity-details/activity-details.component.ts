@@ -29,9 +29,12 @@ export class ActivityDetailsComponent implements OnInit {
 
     this.route.parent.data.subscribe(data => {
       const resolvedData: ActivityResolved = data.resolvedData;
-      this.errorMessage = resolvedData.error;
-      // potential form should be resetted
-      this.onActivityRetrieved(resolvedData.activity);
+      if (resolvedData.error) {
+        this.errorMessage = resolvedData.error.friendlyMessage;
+      } else {
+        // potential form should be resetted
+        this.onActivityRetrieved(resolvedData.activity);
+      }
     });
   }
 

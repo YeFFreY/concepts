@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ActivityService} from './activity.service';
 import {Activity} from '../../shared/interfaces';
 import {DisplayModeEnum} from './DisplayModeEnum';
+import {DataServiceError} from '../../../lib/services.utils';
 
 @Component({
   template: `
@@ -36,10 +37,10 @@ export class ActivitiesComponent implements OnInit {
     this.changeDisplayMode(DisplayModeEnum[display]);
 
     this.activityService.getActivities().subscribe({
-      next: activities => {
+      next: (activities: Activity[]) => {
         this.activities = activities;
       },
-      error: err => this.errorMessage = err
+      error: (err: DataServiceError) => this.errorMessage = err.friendlyMessage + ' ' + err.errorType
     });
   }
 
