@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ActivityResolverService } from './activity-resolver.service';
+import {ActivityResolverService} from './activity-resolver.service';
 
 describe('ActivityResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

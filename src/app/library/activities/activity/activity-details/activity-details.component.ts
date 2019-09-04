@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Activity, ActivityResolved} from '../../../shared/interfaces';
+import {Activity, ActivityResolved} from '../../../../shared/interfaces';
 
 @Component({
   template: `

@@ -1,5 +1,5 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Activity, ActivityCategory, Skill} from '../shared/interfaces';
+import {Activity, ActivityCategory, Skill} from '../../shared/interfaces';
 
 export class ActivityData implements InMemoryDbService {
   createDb() {

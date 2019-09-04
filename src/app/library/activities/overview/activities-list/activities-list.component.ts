@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {Activity} from '../../../shared/interfaces';
+import {Activity} from '../../../../shared/interfaces';
 import {DisplayModeEnum} from '../DisplayModeEnum';
 
 @Component({

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import {Activity} from '../../shared/interfaces';
-import {DataServiceError, handleError} from '../../../lib/services.utils';
+import {Activity} from '../../../shared/interfaces';
+import {DataServiceError, handleError} from '../../../../lib/services.utils';
 
 @Injectable()
 export class ActivityService {

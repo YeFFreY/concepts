@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ActivityService} from './activity.service';
-import {Activity} from '../../shared/interfaces';
+import {Activity} from '../../../shared/interfaces';
 import {DisplayModeEnum} from './DisplayModeEnum';
-import {DataServiceError} from '../../../lib/services.utils';
+import {DataServiceError} from '../../../../lib/services.utils';
 
 @Component({
   template: `
@@ -22,9 +22,9 @@ import {DataServiceError} from '../../../lib/services.utils';
           <p [hidden]="displayMode !== displayModeEnum.Grid">No grid visualization done yet</p>
       </div>
   `,
-  styleUrls: ['./activities.component.scss']
+  styleUrls: ['./activities-overview.component.scss']
 })
-export class ActivitiesComponent implements OnInit {
+export class ActivitiesOverviewComponent implements OnInit {
   displayMode: DisplayModeEnum;
   displayModeEnum = DisplayModeEnum;
   errorMessage: string;

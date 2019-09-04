@@ -1,11 +1,10 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {ActivitiesComponent} from './activities.component';
-import {ActivitiesListComponent} from './activities-list/activities-list.component';
+import {RouterModule, Routes} from '@angular/router';
 
 
 const routes: Routes = [
-  {path: '', component: ActivitiesComponent}
+  {path: '', loadChildren: () => import('./overview/activities-overview.module').then(mod => mod.ActivitiesOverviewModule)},
+  {path: ':id', loadChildren: () => import('./activity/activity.module').then(mod => mod.ActivityModule)},
 ];
 
 @NgModule({
@@ -13,5 +12,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ActivitiesRoutingModule {
-  static components = [ActivitiesComponent, ActivitiesListComponent];
 }

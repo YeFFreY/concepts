@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Activity, ActivityResolved} from '../../shared/interfaces';
+import {Activity, ActivityResolved} from '../../../shared/interfaces';
 import {Observable, of} from 'rxjs';
 import {ActivityService} from './activity.service';
 import {catchError, map} from 'rxjs/operators';
-import {DataServiceError} from '../../../lib/services.utils';
-import {ActivityCategoryService} from '../../core/services/activity-category.service';
+import {DataServiceError} from '../../../../lib/services.utils';
+import {ActivityCategoryService} from '../../../core/services/activity-category.service';
 
 @Injectable()
 export class ActivityResolverService implements Resolve<ActivityResolved> {

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {combineLatest, Observable} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
-import {Activity, ActivityCategory} from '../../shared/interfaces';
-import {DataServiceError, handleError} from '../../../lib/services.utils';
-import {ActivityCategoryService} from '../../core/services/activity-category.service';
+import {Activity, ActivityCategory} from '../../../shared/interfaces';
+import {DataServiceError, handleError} from '../../../../lib/services.utils';
+import {ActivityCategoryService} from '../../../core/services/activity-category.service';
 
 @Injectable()
 export class ActivityService {
