@@ -9,6 +9,7 @@ import {DataServiceError} from '../../../../lib/services.utils';
   template: `
       <div>
           <h1>Activities</h1>
+          <a [routerLink]="['create']">New Activity</a>
 
           <button (click)="changeDisplayMode(displayModeEnum.Grid)">Grid</button>
           <button (click)="changeDisplayMode(displayModeEnum.List)">List</button>
