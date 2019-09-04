@@ -12,8 +12,7 @@ import {Activity, ActivityResolved} from '../../../shared/interfaces';
           <a [routerLink]="['/library/activities']" queryParamsHandling="preserve">Back</a>
       </div>
   `,
-  styleUrls: ['./activity-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./activity-details.component.scss']
 })
 export class ActivityDetailsComponent implements OnInit {
   activity: Activity;

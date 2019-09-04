@@ -13,6 +13,8 @@ import {Component} from '@angular/core';
     </div>
     <div>
         <router-outlet></router-outlet>
+
+        <a [routerLink]="['/library/activities',3]">Details For 3</a>
     </div>
   `,
   styleUrls: ['./activity.component.scss']

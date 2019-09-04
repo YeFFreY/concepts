@@ -5,6 +5,7 @@ export interface Activity {
   title: string;
   overview: string;
   categoryId?: number;
+  category?: ActivityCategory;
 }
 
 export interface ActivityCategory {

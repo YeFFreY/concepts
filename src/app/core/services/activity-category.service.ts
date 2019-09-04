@@ -10,13 +10,18 @@ import {Observable} from 'rxjs';
 })
 export class ActivityCategoryService {
 
-  activityCategories$: Observable<ActivityCategory[] | DataServiceError> = this.http.get<ActivityCategory[]>('api/activityCategories')
-    .pipe(
-      tap(data => console.log('Got activity categories', JSON.stringify(data))),
-      shareReplay(1), // this allows to  not ask for the HTTP GET but use the last value each time it is subscribed to
-      catchError(handleError)
-    );
+  private activityCategories$: Observable<ActivityCategory[] | DataServiceError> =
+    this.http.get<ActivityCategory[]>('api/activityCategories')
+      .pipe(
+        tap(data => console.log('Got activity categories', JSON.stringify(data))),
+        shareReplay(1), // this allows to  not ask for the HTTP GET but use the last value each time it is subscribed to
+        catchError(handleError)
+      );
 
   constructor(private http: HttpClient) {
+  }
+
+  getCategories(): Observable<ActivityCategory[] | DataServiceError> {
+    return this.activityCategories$;
   }
 }
