@@ -15,7 +15,7 @@ import {CoreModule} from './core/core.module';
   imports: [
     BrowserModule,
     CoreModule,
-    InMemoryWebApiModule.forRoot(ActivityData, {delay: 1000}),
+    InMemoryWebApiModule.forRoot(ActivityData, {delay: 500}),
     AppRoutingModule,
     SharedModule,
   ],

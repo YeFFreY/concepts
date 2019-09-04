@@ -9,6 +9,7 @@ import {Component} from '@angular/core';
           <a [routerLink]="['/home']">Home</a>
           <a [routerLink]="['/library']">Library</a>
       </nav>
+      <app-spinner></app-spinner>
       <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss']

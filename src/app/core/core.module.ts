@@ -2,16 +2,23 @@ import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {EnsureModuleLoadedOnceGuard} from './ensure-module-loaded-once.guard';
+import {httpInterceptorProviders} from './interceptors';
+import { SpinnerModule } from './spinner/spinner.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    SpinnerModule
   ],
   exports: [
-    HttpClientModule
+    HttpClientModule,
+    SpinnerModule
+  ],
+  providers: [
+    httpInterceptorProviders
   ]
   // these should be singleton
 })
