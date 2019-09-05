@@ -15,7 +15,7 @@ export class HttpRequestCounterInterceptor implements HttpInterceptor {
 
       .pipe(tap(
         event => console.log(event),
-        error => console.log(error)
+        error => console.error(error)
         ), finalize(() => {
           this.spinnerService.dec();
         })

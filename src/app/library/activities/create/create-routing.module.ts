@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ActivityCreateComponent} from './activity-create/activity-create.component';
+import {ActivityCreateComponent} from './activity-create.component';
 
 
 const routes: Routes = [

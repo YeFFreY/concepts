@@ -8,6 +8,12 @@ export interface Activity {
   category?: ActivityCategory;
 }
 
+export function from(id: number = null, title: string = '', overview: string = ''): Activity {
+  return {
+    id, title, overview
+  };
+}
+
 export interface ActivityCategory {
   id: number;
   name: string;
