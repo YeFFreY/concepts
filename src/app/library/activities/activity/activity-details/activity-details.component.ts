@@ -7,7 +7,7 @@ import {Activity, ActivityResolved} from '../../../../shared/interfaces';
       <div>
           <p>error ? {{errorMessage}}</p>
           <h1>
-              {{ activity?.id}} - {{ activity?.title}}
+              {{ activity?.id}} - {{ activity?.details.title}}
           </h1>
           <a [routerLink]="['/library/activities']" queryParamsHandling="preserve">Back</a>
       </div>

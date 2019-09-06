@@ -19,8 +19,8 @@ import {DisplayModeEnum} from '../DisplayModeEnum';
               <tbody>
               <tr *ngFor="let activity of activities">
                   <td>{{activity.id}}</td>
-                  <td>{{activity.title}}</td>
-                  <td>{{activity.overview}}</td>
+                  <td>{{activity.details.title}}</td>
+                  <td>{{activity.details.overview}}</td>
                   <td>{{activity.category?.name}}</td>
                   <td><a [routerLink]="['/library/activities',activity.id]" [queryParams]="{display: displayModeEnum.List}">Details</a></td>
               </tr>

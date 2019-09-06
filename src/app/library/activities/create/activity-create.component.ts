@@ -1,21 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ActivityService} from './activity.service';
+import {Activity} from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-activity-create',
   template: `
       <div>
           <h1>New Activity</h1>
-          <form (ngSubmit)="save()" [formGroup]="activityForm">
-              <div>
-                  <label>Title</label>
-                  <input type="text" formControlName="title">
-              </div>
-              <div>
-                  <label>Overview</label>
-                  <input type="text" formControlName="overview">
-              </div>
+          <form novalidate (ngSubmit)="save(activityForm)" [formGroup]="activityForm">
+              <app-activity-details-form formControlName="details"></app-activity-details-form>
               <div formArrayName="activitySkills"
               *ngFor="let activitySkill of activitySkills.controls; let i=index;">
                 <div [formGroupName]="i">
@@ -25,7 +19,7 @@ import {ActivityService} from './activity.service';
                     <input type="text" formControlName="level">
                 </div>
               </div>
-              <button type="submit" [disabled]="!activityForm.valid">Save</button>
+              <button type="submit">Save</button>
               <button (click)="populate($event)">Populate</button>
               <button (click)="addSkill($event)">Add Skill</button>
           </form>
@@ -48,10 +42,9 @@ export class ActivityCreateComponent implements OnInit {
 
   ngOnInit() {
     this.activityForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      overview: '',
+      details: [],
       activitySkills: this.fb.array([this.buildActivitySkill()])
-    });
+    }, {updateOn: 'blur'});
 
     // on edit, when the data is retrieved, populate the skills would be like (on a specific callback of the httpGet:
 /*
@@ -71,18 +64,23 @@ export class ActivityCreateComponent implements OnInit {
     });
   }
 
-  save() {
-    console.log('saving', this.activityForm);
-    this.activityService.createActivity(this.activityForm.value).subscribe({
-      next: data => console.log('saved and got', data),
-      error: err => console.error('not saved because of error', err)
-    });
+  save({value, valid}: { value: Activity, valid: boolean }) {
+    console.log('Saving ?', value, valid);
+    /*
+        this.activityService.createActivity(this.activityForm.value).subscribe({
+          next: data => console.log('saved and got', data),
+          error: err => console.error('not saved because of error', err)
+        });
+    */
   }
 
   populate(e) {
     e.preventDefault();
     this.activityForm.patchValue({
-      title: 'Populated title',
+      details: {
+        title: 'Populated title',
+        overview: 'peepeepoopoo'
+      }
     });
   }
 

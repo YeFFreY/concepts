@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ActivityCreateComponent} from './activity-create.component';
+import {ActivityDetailsFormComponent} from './activity-details-form.component';
 
 
 const routes: Routes = [
@@ -12,5 +13,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class CreateRoutingModule {
-  static components = [ActivityCreateComponent];
+  static components = [ActivityCreateComponent, ActivityDetailsFormComponent];
 }
