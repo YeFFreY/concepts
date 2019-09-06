@@ -59,7 +59,8 @@ export class ActivityCreateComponent implements OnInit {
       title: this.activity.title;
       overview: this.activity.overview
     });
-    this.activityForm.setControl('activitySkills', this.fb.array(activity.skills || []));
+    this.activityForm.setControl('activitySkills',
+    this.fb.array(activity.skills.map(item => this.buildActivitySkill(item.skill, item.level) || []));
 */
   }
 

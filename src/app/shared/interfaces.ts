@@ -9,6 +9,8 @@ export interface Activity {
 }
 
 export function from(id: number = null, title: string = '', overview: string = ''): Activity {
+  // arrays might be prepoluted with empty value so always one item is shown in dynamic formArrays
+  // like activitySkills: ['']
   return {
     id, title, overview
   };
