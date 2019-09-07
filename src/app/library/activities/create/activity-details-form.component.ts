@@ -18,16 +18,6 @@ import {
           <div>
               <label>Title</label>
               <input type="text" formControlName="title">
-              <div *ngIf="title.invalid && (title.dirty || title.touched)"
-                   class="text-red-500">
-
-                  <div *ngIf="title.errors.required">
-                      Name is required.
-                  </div>
-                  <div *ngIf="title.errors.minlength">
-                      Name must be at least 3 characters long.
-                  </div>
-              </div>
           </div>
           <div>
               <label>Overview</label>
@@ -51,6 +41,8 @@ import {
 })
 export class ActivityDetailsFormComponent implements OnInit, ControlValueAccessor, Validator {
   basicInfoForm: FormGroup;
+  onChange: any = () => {
+  };
 
   constructor(private fb: FormBuilder) {
   }
@@ -67,6 +59,7 @@ export class ActivityDetailsFormComponent implements OnInit, ControlValueAccesso
   }
 
   registerOnChange(fn: any): void {
+    this.onChange = fn;
     this.basicInfoForm.valueChanges.subscribe(fn);
   }
 
@@ -82,7 +75,7 @@ export class ActivityDetailsFormComponent implements OnInit, ControlValueAccesso
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return this.basicInfoForm.valid ? null : {details: {valid: false,},};
+    return this.basicInfoForm.valid ? null : {details: {valid: false}};
   }
 
 }

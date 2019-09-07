@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivityService} from './activity.service';
 import {Activity} from '../../../shared/interfaces';
 
@@ -19,9 +19,9 @@ import {Activity} from '../../../shared/interfaces';
                     <input type="text" formControlName="level">
                 </div>
               </div>
-              <button type="submit">Save</button>
-              <button (click)="populate($event)">Populate</button>
-              <button (click)="addSkill($event)">Add Skill</button>
+              <button>Save</button>
+              <button type="button" (click)="populate($event)">Populate</button>
+              <button type="button" (click)="addSkill($event)">Add Skill</button>
           </form>
           <br>Dirty : {{activityForm.dirty}}
           <br>Touched : {{activityForm.touched}}
@@ -59,7 +59,7 @@ export class ActivityCreateComponent implements OnInit {
 
   buildActivitySkill(): FormGroup {
     return this.fb.group({
-      skill: '',
+      skill: ['', Validators.required],
       level: ''
     });
   }
@@ -75,7 +75,6 @@ export class ActivityCreateComponent implements OnInit {
   }
 
   populate(e) {
-    e.preventDefault();
     this.activityForm.patchValue({
       details: {
         title: 'Populated title',
@@ -85,7 +84,6 @@ export class ActivityCreateComponent implements OnInit {
   }
 
   addSkill(e) {
-    e.preventDefault();
     this.activitySkills.push(this.buildActivitySkill());
   }
 }
