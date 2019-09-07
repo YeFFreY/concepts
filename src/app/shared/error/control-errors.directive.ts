@@ -4,6 +4,10 @@ import {EMPTY, merge, Observable, Subscription} from 'rxjs';
 import {ControlErrorComponent} from './control-error.component';
 import {FormSubmitDirective} from './form-submit.directive';
 
+/**
+ * Thanks to :
+ * https://netbasal.com/make-your-angular-forms-error-messages-magically-appear-1e32350b7fa5
+ */
 @Directive({
   selector: '[formControl], [formControlName]'
 })
