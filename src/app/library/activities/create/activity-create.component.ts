@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivityService} from './activity.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Activity} from '../../../shared/interfaces';
 
 @Component({
@@ -10,18 +9,9 @@ import {Activity} from '../../../shared/interfaces';
           <h1>New Activity</h1>
           <form novalidate (ngSubmit)="save(activityForm)" [formGroup]="activityForm">
               <app-activity-details-form formControlName="details"></app-activity-details-form>
-              <div formArrayName="activitySkills"
-              *ngFor="let activitySkill of activitySkills.controls; let i=index;">
-                <div [formGroupName]="i">
-                    <label attr.for="{{'skill' + i}}">Skill</label>
-                    <input id="{{'skill' + i}}" type="text" formControlName="skill">
-                    <label>Level</label>
-                    <input type="text" formControlName="level">
-                </div>
-              </div>
+              <app-activity-skills-form formControlName="activitySkills"></app-activity-skills-form>
               <button>Save</button>
               <button type="button" (click)="populate($event)">Populate</button>
-              <button type="button" (click)="addSkill($event)">Add Skill</button>
           </form>
           <br>Dirty : {{activityForm.dirty}}
           <br>Touched : {{activityForm.touched}}
@@ -33,17 +23,14 @@ import {Activity} from '../../../shared/interfaces';
 })
 export class ActivityCreateComponent implements OnInit {
   activityForm: FormGroup;
-  get activitySkills(): FormArray {
-    return this.activityForm.get('activitySkills') as FormArray;
-  }
 
-  constructor(private fb: FormBuilder, private activityService: ActivityService) {
+  constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.activityForm = this.fb.group({
       details: [],
-      activitySkills: this.fb.array([this.buildActivitySkill()])
+      activitySkills: []
     }, {updateOn: 'blur'});
 
     // on edit, when the data is retrieved, populate the skills would be like (on a specific callback of the httpGet:
@@ -57,12 +44,6 @@ export class ActivityCreateComponent implements OnInit {
 */
   }
 
-  buildActivitySkill(): FormGroup {
-    return this.fb.group({
-      skill: ['', Validators.required],
-      level: ''
-    });
-  }
 
   save({value, valid}: { value: Activity, valid: boolean }) {
     console.log('Saving ?', value, valid);
@@ -83,7 +64,4 @@ export class ActivityCreateComponent implements OnInit {
     });
   }
 
-  addSkill(e) {
-    this.activitySkills.push(this.buildActivitySkill());
-  }
 }
