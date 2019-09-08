@@ -38,16 +38,6 @@ export class ActivityCreateComponent implements OnInit {
     this.activityForm = this.formService.getForm();
     this.detailsForm = this.formService.getDetails();
     this.skills = this.formService.getSkills();
-
-    // on edit, when the data is retrieved, populate the skills would be like (on a specific callback of the httpGet:
-/*
-    this.activityForm.patchValue({
-      title: this.activity.title;
-      overview: this.activity.overview
-    });
-    this.activityForm.setControl('activitySkills',
-    this.fb.array(activity.skills.map(item => this.buildActivitySkill(item.skill, item.level) || []));
-*/
   }
 
 

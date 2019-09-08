@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
-import {ActivityFormService} from '../activity-form.service';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-activity-skills-form',
@@ -19,12 +18,5 @@ import {ActivityFormService} from '../activity-form.service';
 export class ActivitySkillsFormComponent {
   @Input() skillGroup: FormGroup;
   @Output() removeSkill = new EventEmitter();
-
-  get activitySkills(): FormArray {
-    return this.formService.getSkills();
-  }
-
-  constructor(private formService: ActivityFormService) {
-  }
 
 }
