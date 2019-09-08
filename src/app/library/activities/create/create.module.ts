@@ -5,6 +5,7 @@ import {CreateRoutingModule} from './create-routing.module';
 import {ActivityService} from './activity.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../../../shared/shared.module';
+import {ActivityFormService} from './activity-form.service';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import {SharedModule} from '../../../shared/shared.module';
     CreateRoutingModule,
   ],
   providers: [
-    ActivityService
+    ActivityFormService, ActivityService
   ]
 })
 export class CreateModule {

@@ -1,13 +1,14 @@
 import {DataServiceError} from '../../lib/services.utils';
 
 export interface Activity {
-  id: number;
+  id?: number;
   details: {
     title: string;
     overview: string;
-  },
+  };
   categoryId?: number;
   category?: ActivityCategory;
+  skills?: Skill[];
 }
 
 export function from(id: number = null, title: string = '', overview: string = ''): Activity {
@@ -23,13 +24,13 @@ export function from(id: number = null, title: string = '', overview: string = '
 }
 
 export interface ActivityCategory {
-  id: number;
+  id?: number;
   name: string;
   description: string;
 }
 
 export interface Skill {
-  id: number;
+  id?: number;
   name: string;
   description: string;
 }

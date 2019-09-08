@@ -1,89 +1,30 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
-import {
-  AbstractControl,
-  ControlValueAccessor,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validator,
-  Validators
-} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormArray, FormGroup} from '@angular/forms';
+import {ActivityFormService} from '../activity-form.service';
 
 @Component({
   selector: 'app-activity-skills-form',
   template: `
-      <ng-container [formGroup]="skillsForm">
-          <div formArrayName="activitySkills"
-               *ngFor="let activitySkill of activitySkills.controls; let i=index;">
-              <div [formGroupName]="i">
-                  <label attr.for="{{'skill' + i}}">Skill</label>
-                  <input id="{{'skill' + i}}" type="text" formControlName="skill">
-                  <label>Level</label>
-                  <input type="text" formControlName="level">
-              </div>
-          </div>
-          <button class="p-4 bg-blue-500 text-white" type="button" (click)="addSkill($event)">Add Skill</button>
-
-      </ng-container>
+      <div [formGroup]="skillGroup">
+          <label>Skill</label>
+          <input type="text" formControlName="name">
+          <label>Level</label>
+          <input type="text" formControlName="description">
+          <button class="p-2 m-2 bg-red-500 text-white" type="button" (click)="removeSkill.emit()">X</button>
+      </div>
   `,
   styleUrls: ['./activity-skills-form.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ActivitySkillsFormComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => ActivitySkillsFormComponent),
-      multi: true,
-    }
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActivitySkillsFormComponent implements OnInit, ControlValueAccessor, Validator {
-  skillsForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-  }
-
-  ngOnInit() {
-    this.skillsForm = this.fb.group({
-      activitySkills: this.fb.array([this.buildActivitySkill()])
-    });
-  }
+export class ActivitySkillsFormComponent {
+  @Input() skillGroup: FormGroup;
+  @Output() removeSkill = new EventEmitter();
 
   get activitySkills(): FormArray {
-    return this.skillsForm.get('activitySkills') as FormArray;
+    return this.formService.getSkills();
   }
 
-  buildActivitySkill(): FormGroup {
-    return this.fb.group({
-      skill: ['', Validators.required],
-      level: ''
-    });
-  }
-
-  addSkill(e) {
-    this.activitySkills.push(this.buildActivitySkill());
-  }
-
-  registerOnChange(fn: any): void {
-    this.skillsForm.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.skillsForm.valueChanges.subscribe(fn);
-  }
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return this.skillsForm.valid ? null : {activitySkills: {valid: false}};
-  }
-
-  writeValue(obj: any): void {
-    console.log(obj);
+  constructor(private formService: ActivityFormService) {
   }
 
 }
